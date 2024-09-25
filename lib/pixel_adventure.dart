@@ -1,3 +1,3 @@
 import 'package:flame/game.dart';
 
-class PixelAdventure extends FlameGame {}
+class PixelAdventure extends FlameGame{}
