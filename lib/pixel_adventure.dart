@@ -1,3 +1,20 @@
-import 'package:flame/game.dart';
+import 'dart:async';
 
-class PixelAdventure extends FlameGame{}
+import 'package:flame/components.dart';
+import 'package:flame/game.dart';
+import 'package:pixel_adventure/levels/level.dart';
+
+class PixelAdventure extends FlameGame {
+  late final CameraComponent cam;
+  @override
+  final world = Level();
+
+  @override
+  FutureOr<void> onLoad() {
+    cam = CameraComponent.withFixedResolution(
+        world: world, width: 640, height: 360);
+
+    addAll([cam, world]);
+    return super.onLoad();
+  }
+}
