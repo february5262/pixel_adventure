@@ -5,24 +5,35 @@ import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum PlayerState { idle, running }
 
-class Player extends SpriteAnimationGroupComponent with HasGameRef<PixelAdventure> {
+enum PlayerDirection { left, right, none }
 
-  Player({required this.character});
+class Player extends SpriteAnimationGroupComponent
+    with HasGameRef<PixelAdventure> {
+  Player({position, required this.character}) : super(position: position);
   String character;
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runningAnimation;
   final double stepTime = 0.05;
 
+  PlayerDirection playerDirection = PlayerDirection.none;
+  double moveSpeed = 100;
+  Vector2 velocity = Vector2.zero();
+
   @override
   FutureOr<void> onLoad() {
     _loadAllAnimations();
     return super.onLoad();
   }
-  
+
+  @override
+  void update(double dt) {
+    _updatePlayerMovement(dt);
+    super.update(dt);
+  }
+
   void _loadAllAnimations() {
     idleAnimation = _spriteAnimation('Idle', 11);
-
     runningAnimation = _spriteAnimation('Run', 12);
 
     // List of all animations
@@ -34,9 +45,9 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<PixelAdventur
     // Set current animation
     current = PlayerState.idle;
   }
-  
-  SpriteAnimation _spriteAnimation(String state, int amount){
-   return SpriteAnimation.fromFrameData(
+
+  SpriteAnimation _spriteAnimation(String state, int amount) {
+    return SpriteAnimation.fromFrameData(
       game.images.fromCache('Main Characters/$character/$state (32x32).png'),
       SpriteAnimationData.sequenced(
         amount: amount,
@@ -44,5 +55,19 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<PixelAdventur
         textureSize: Vector2.all(32),
       ),
     );
+  }
+
+  void _updatePlayerMovement(double dt) {
+    double dirX = 0.0;
+    switch (playerDirection) {
+      case PlayerDirection.left:
+      dirX -= moveSpeed;
+        break;
+      case PlayerDirection.right:
+        break;
+      case PlayerDirection.none:
+        break;
+      default:
+    }
   }
 }
