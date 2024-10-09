@@ -65,8 +65,10 @@ flutter:
       - assets/tiles/Level-01.tmx
       - assets/tiles/Level-02.tmx
       - assets/tiles/Pixel Adventure.tsx
+      - assets/images/Background/
       - assets/images/Terrain/
       - assets/images/HUD/
+      - assets/images//Items/Fruits/
       - assets/images/Main Characters/Mask Dude/
       - assets/images/Main Characters/Ninja Frog/
       - assets/images/Main Characters/Pink Man/
