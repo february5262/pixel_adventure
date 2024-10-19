@@ -45,8 +45,7 @@ class Checkpoint extends SpriteAnimationComponent
           amount: 26,
           stepTime: 0.05,
           textureSize: Vector2.all(64),
-          loop: false
-      ),
+          loop: false),
     );
     super.onCollision(intersectionPoints, other);
   }
